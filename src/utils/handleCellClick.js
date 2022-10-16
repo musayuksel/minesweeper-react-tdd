@@ -34,7 +34,7 @@ export function handleCellClick(
       downLeftCellIndex(currentCellIndex, boardWidth),
       downRightCellIndex(currentCellIndex, boardWidth),
     ];
-    console.log(aroundOfCell);
+
     setBoardCellsWithInfos((prev) =>
       prev.map((cell) => {
         if (aroundOfCell.includes(cell.index)) {
