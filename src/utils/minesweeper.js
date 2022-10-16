@@ -10,13 +10,15 @@ export const countMinesAroundCell = (board, currentCellIndex, boardWidth) => {
     const bottomLeftCellIndex = leftCellIndex(downCellIndex);
     const bottomRightCellIndex = rightCellIndex(downCellIndex);
 
-    const aroundOfCell = [upCellIndex, downCellIndex, leftCellIndex, rightCellIndex, upLeftCellIndex, upRightCellIndex, bottomLeftCellIndex, bottomRightCellIndex];
+    const aroundOfCell = [upCellIndex, downCellIndex, leftCellIndex(currentCellIndex), rightCellIndex(currentCellIndex), upLeftCellIndex, upRightCellIndex, bottomLeftCellIndex, bottomRightCellIndex];
 
-    return aroundOfCell.reduce((counter, cell) => board[cell] === 'X' ? counter + 1 : counter, 0);
+    const mineCounter  = aroundOfCell.reduce((counter, cell) => board[cell] === 'X' ? counter + 1 : counter, 0);
+    return mineCounter === 'X' ? 'X' : mineCounter.toString();
 }
 
-
-
-export function minesweeper(chars) {
-    console.log('test');
+export const minesweeper = (chars) => {
+    const boardWidth = boardWith(chars);
+    let xxx= chars.map((char, index) => char === 'X' ? char : countMinesAroundCell(chars, index, boardWidth));
+    console.debug(xxx);
+    return xxx;
 }
