@@ -33,16 +33,16 @@ export const downRightCellIndex = (currentCellIndex, boardWidth) => {
 };
 
 export const countMinesAroundCell = (board, currentCellIndex, boardWidth) => {
-  const aroundOfCell = [
-    upCellIndex(currentCellIndex, boardWidth),
-    downCellIndex(currentCellIndex, boardWidth),
-    leftCellIndex(currentCellIndex, boardWidth),
-    rightCellIndex(currentCellIndex, boardWidth),
-    upLeftCellIndex(currentCellIndex, boardWidth),
-    upRightCellIndex(currentCellIndex, boardWidth),
-    downLeftCellIndex(currentCellIndex, boardWidth),
-    downRightCellIndex(currentCellIndex, boardWidth),
-  ];
+    const aroundOfCell = [
+      upCellIndex(currentCellIndex, boardWidth),
+      downCellIndex(currentCellIndex, boardWidth),
+      leftCellIndex(currentCellIndex, boardWidth),
+      rightCellIndex(currentCellIndex, boardWidth),
+      upLeftCellIndex(currentCellIndex, boardWidth),
+      upRightCellIndex(currentCellIndex, boardWidth),
+      downLeftCellIndex(currentCellIndex, boardWidth),
+      downRightCellIndex(currentCellIndex, boardWidth),
+    ];
 
   const mineCounter = aroundOfCell.reduce(
     (counter, cell) => (board[cell] === 'X' ? counter + 1 : counter),

@@ -1,36 +1,30 @@
 import React from 'react';
+import { handleCellClick } from '../utils/handleCellClick';
 import './Cell.style.css';
-
-export default function Cell({ cell, isGameOver, setIsGameOver }) {
-  const [isRevealed, setIsRevealed] = React.useState(isGameOver || false);
-
-  React.useEffect(() => {
-    setIsRevealed(isGameOver);
-  }, [isGameOver]);
-
+export default function Cell({ cell, setBoardCellsWithInfos, setIsGameOver,boardWidth }) {
+  
   const handleClick = () => {
-    if (cell === 'X') {
-      setIsGameOver(true);
-    }
-    setIsRevealed(true);
+    handleCellClick(cell,setIsGameOver,setBoardCellsWithInfos,boardWidth);
   };
-  const classes = `cell ${
-    !isRevealed
-      ? 'hidden'
-      : cell === 'X'
-      ? 'bomb'
-      : cell === '0'
-      ? 'empty'
-      : cell === '1'
-      ? 'one'
-      : cell === '2'
-      ? 'two'
-      : 'threeOrMore'
-  }`;
 
+  const classes = 
+     `cell ${
+      !cell.isRevealed
+        ? 'hidden'
+        : cell.value === 'X'
+        ? 'bomb'
+        : cell.value === '0'
+        ? 'empty'
+        : cell.value === '1'
+        ? 'one'
+        : cell.value === '2'
+        ? 'two'
+        : 'threeOrMore'
+    }`;
+    
   return (
     <div onClick={handleClick} className={classes}>
-      {isRevealed ? cell : '?'}
+      {cell.isRevealed ? cell.value : '?'}
     </div>
   );
 }
