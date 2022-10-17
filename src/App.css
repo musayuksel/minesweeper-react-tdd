@@ -27,3 +27,23 @@
     background-color: white;
     color: #282c34;
 }
+
+.customMinesweeperContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    padding: 1rem;
+}
+.customMinesweeperContainer textarea{
+    border: 1px solid white;
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 10px;
+    padding: 10px;
+    resize: none;
+}
+.customMinesweeperContainer button{
+    margin: 1rem;
+}
