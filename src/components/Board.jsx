@@ -2,14 +2,18 @@ import React from 'react';
 import { boardWith, minesweeper } from '../utils/minesweeper';
 import { boardStyles } from './Board.styles';
 import Cell from './Cell';
+import {BsEmojiSunglasses,BsEmojiSmile} from 'react-icons/bs';
+import {FaRegSadTear} from 'react-icons/fa';
 
 export default function Board({ currentBoard, resetBoard }) {
   const boardWidth = boardWith(currentBoard);
   const [isGameOver, setIsGameOver] = React.useState(false);
   const [boardCellsWithInfos, setBoardCellsWithInfos] = React.useState([]);
-  const [isGameWon, setIsGameWon] = React.useState(true);
+  const [isGameWon, setIsGameWon] = React.useState(false);
 
   React.useEffect(() => {
+    setIsGameOver(false);
+    setIsGameWon(false);
     setBoardCellsWithInfos(
       minesweeper(currentBoard).map((cell, index) => ({
         value: cell,
@@ -21,14 +25,15 @@ export default function Board({ currentBoard, resetBoard }) {
 
   React.useEffect(() => {
     //  after every click check if the game is won
-    const isGameWon = boardCellsWithInfos.every((cell) => {
-      if (cell.value === 'X') return true;
+    const isGameWon =boardCellsWithInfos.every((cell) => {
+      if (cell.value === 'X' && !cell.isRevealed) return true;
       return cell.value !== 'X' && cell.isRevealed;
     });
 
     setIsGameWon(isGameWon);
   }, [boardCellsWithInfos]);
 
+ 
   const board = boardCellsWithInfos.map((cell, index) => {
     return (
       <Cell
@@ -37,6 +42,8 @@ export default function Board({ currentBoard, resetBoard }) {
         cell={cell}
         setBoardCellsWithInfos={setBoardCellsWithInfos}
         boardWidth={boardWidth}
+        isGameWon={isGameWon}
+        isGameOver={isGameOver}
       />
     );
   });
@@ -49,10 +56,11 @@ export default function Board({ currentBoard, resetBoard }) {
   }
   return (
     <>
+    {!isGameOver && !isGameWon && <h3><BsEmojiSmile/></h3>}
       {isGameOver && (
         <section>
           <button onClick={handleSameBoardClick}>
-            Game Over! Same board again?
+          <FaRegSadTear/> Same board again?
           </button>
           <button
             onClick={() => {
@@ -64,15 +72,17 @@ export default function Board({ currentBoard, resetBoard }) {
           </button>
         </section>
       )}
-      {isGameWon && !isGameOver && (
+      {(currentBoard.length>0 && isGameWon && !isGameOver) && (
         <section>
           <button
             onClick={() => {
               resetBoard();
               setIsGameWon(false);
             }}
-          >
-            New Game
+            >
+            <BsEmojiSunglasses/>
+            <BsEmojiSunglasses/>
+            <BsEmojiSunglasses/>
           </button>
         </section>
       )}

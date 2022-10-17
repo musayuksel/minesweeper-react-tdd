@@ -1,7 +1,7 @@
 import React from 'react';
 import { handleCellClick } from '../utils/handleCellClick';
 import './Cell.style.css';
-export default function Cell({ cell, setBoardCellsWithInfos, setIsGameOver,boardWidth }) {
+export default function Cell({ cell, setBoardCellsWithInfos, setIsGameOver,boardWidth,isGameWon,isGameOver }) {
   
   const handleClick = () => {
     handleCellClick(cell,setIsGameOver,setBoardCellsWithInfos,boardWidth);
@@ -9,8 +9,10 @@ export default function Cell({ cell, setBoardCellsWithInfos, setIsGameOver,board
 
   const classes = 
      `cell ${
-      !cell.isRevealed
+      !cell.isRevealed && !isGameOver && !isGameWon
         ? 'hidden'
+        : cell.value === 'X'  && isGameWon && !isGameOver
+        ? 'bomb won'
         : cell.value === 'X'
         ? 'bomb'
         : cell.value === '0'
