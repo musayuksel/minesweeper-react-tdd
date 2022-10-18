@@ -1,4 +1,4 @@
-# Live demo => [here...](https://chess-move-validate.netlify.app/) :star: :star: :star:
+# Live demo => [here...](https://musa-minesweeper.netlify.app/) :star: :star: :star:
 
 # MineSweeper
 
@@ -32,6 +32,11 @@ minesweeper([
     "2", "2", "1", "1", "1",
     "0", "0", "0", "1", "X", 
 ]
+```
+
+## Handler function:
+```
+./src/utils/minesweeper.js
 ```
 ## Install 
 ```
