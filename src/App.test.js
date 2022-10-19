@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen,fireEvent } from '@testing-library/react';
 import App from './App';
 import { boardWith, countMinesAroundCell, minesweeper } from './utils/minesweeper';
 
@@ -47,4 +47,19 @@ describe('Mine Sweeper', () => {
     const board = screen.getAllByTestId('board-cell')
     expect(board).toHaveLength(25);
   });
+
+  it('should render 10*10 board when Intermediate button click', () => {
+    render(<App />);
+    const intermediateButton = screen.getByText('Intermediate',{exact: false});
+    fireEvent.click(intermediateButton);
+    const board = screen.getAllByTestId('board-cell')
+    expect(board).toHaveLength(100);
+  })
+  it('should render 20*20 board when Expert button click', () => {
+    render(<App />);
+    const intermediateButton = screen.getByText('Expert',{exact: false});
+    fireEvent.click(intermediateButton);
+    const board = screen.getAllByTestId('board-cell')
+    expect(board).toHaveLength(400);
+  })
 });
