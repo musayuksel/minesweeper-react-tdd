@@ -42,4 +42,9 @@ describe('Mine Sweeper', () => {
     expect(boardResult).toEqual(expectedBoard);
   });
 
+  it('should render 5*5 board for home page', () => {
+    render(<App />);
+    const board = screen.getAllByTestId('board-cell')
+    expect(board).toHaveLength(25);
+  });
 });
