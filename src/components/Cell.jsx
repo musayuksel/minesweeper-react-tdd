@@ -25,7 +25,7 @@ export default function Cell({ cell, setBoardCellsWithInfos, setIsGameOver,board
     }`;
     
   return (
-    <div onClick={handleClick} className={classes}>
+    <div data-testid={'board-cell'} onClick={handleClick} className={classes}>
       {cell.isRevealed ? cell.value : '?'}
     </div>
   );
